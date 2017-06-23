@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<template-document version="1.0" xmlns="http://www.hsmworks.com/namespace/hsmworks/document/template">
+	<template strategy="pocket2d" unit="inches" description="2D Pocket3">
+		<tool version="1.1" type="bull nose end mill" unit="inches" guid="{2a44966d-f3a4-42be-8fb8-2ee5f3b1ab29}">
+			<nc number="3" diameter-offset="3" length-offset="3" turret="0" break-control="0" manual-tool-change="0"/>
+			<coolant mode="flood"/>
+			<material name="hss"/>
+			<body diameter="0.25" corner-radius="0.0625" thread-profile-angle="60" flute-length="0.5" shoulder-length="0.75" shaft-diameter="0.25" body-length="1.25" overall-length="1.75" number-of-flutes="3" thread-pitch="0"/>
+			<motion spindle-rpm="5000" ramp-spindle-rpm="5000" clockwise="yes" feed-mode="per-minute" cutting-feedrate="40" entry-feedrate="40" exit-feedrate="40" plunge-feedrate="13.3333" ramp-feedrate="13.3333" retract-feedrate="13.3333"/>
+		</tool>
+		<parameter name="tool_coolant" expression="'flood'"/>
+		<parameter name="tool_feedCutting" expression="40.in/min"/>
+		<parameter name="tool_feedEntry" expression="40.in/min"/>
+		<parameter name="tool_feedExit" expression="40.in/min"/>
+		<parameter name="tool_feedPerRevolution" expression="tool_feedPlunge/tool_spindleSpeed"/>
+		<parameter name="tool_feedPerTooth" expression="tool_feedCutting/(tool_spindleSpeed * tool_numberOfFlutes)"/>
+		<parameter name="tool_feedPlunge" expression="13.333333333333in/min"/>
+		<parameter name="tool_feedRamp" expression="13.333333333333in/min"/>
+		<parameter name="tool_feedRetract" expression="13.333333333333in/min"/>
+		<parameter name="tool_numberOfTeeth" expression="1"/>
+		<parameter name="tool_rampFeedPerTooth" expression="tool_feedRamp/(tool_rampSpindleSpeed * tool_numberOfFlutes)"/>
+		<parameter name="tool_rampSpindleSpeed" expression="tool_spindleSpeed"/>
+		<parameter name="tool_rampSurfaceSpeed" expression="tool_isTurning ? (200m/min) : (tool_stockDiameter * Math.PI * tool_rampSpindleSpeed)"/>
+		<parameter name="tool_spindleSpeed" expression="5000."/>
+		<parameter name="tool_stockDiameter" expression="tool_isTurning ? (tool_unit == 'millimeters' ? 25 : 25.4) : tool_diameter"/>
+		<parameter name="tool_surfaceSpeed" expression="tool_isTurning ? (200m/min) : (tool_stockDiameter * Math.PI * tool_spindleSpeed)"/>
+		<parameter name="tool_taperedType" expression="'tapered_bull_nose'"/>
+		<parameter name="allowRapidRetract" expression="true"/>
+		<parameter name="allowStepoverCusps" expression="false"/>
+		<parameter name="bothWays" expression="false"/>
+		<parameter name="bottom" expression="bottomOffset"/>
+		<parameter name="bottomMode" expression="'from wcs'"/>
+		<parameter name="bottomOffset" expression="0in"/>
+		<parameter name="bottomRef" expression="undefined"/>
+		<parameter name="chainingTolerance" expression="0.0004in"/>
+		<parameter name="clearanceHeight" expression="retractHeight + clearanceHeightOffset"/>
+		<parameter name="clearanceHeightMode" expression="'from retract height'"/>
+		<parameter name="clearanceHeightOffset" expression="0.4in"/>
+		<parameter name="clearanceHeightRef" expression="undefined"/>
+		<parameter name="compensation" expression="'left'"/>
+		<parameter name="compensationDeltaRadius" expression="(numberOfFinishingStepovers &gt; 0) ? Math.min(tool_diameter * 0.05; finishingStepover * 0.95) : (tool_diameter * 0.05)"/>
+		<parameter name="compensationType" expression="'computer'"/>
+		<parameter name="contourTolerance" expression="tolerance * 0.5"/>
+		<parameter name="doFinishingPasses" expression="false"/>
+		<parameter name="doLeadIn" expression="true"/>
+		<parameter name="doLeadOut" expression="true"/>
+		<parameter name="doMultipleDepths" expression="true"/>
+		<parameter name="entry_distance" expression="tool_diameter * 0.1"/>
+		<parameter name="entry_perpendicular" expression="false"/>
+		<parameter name="entry_radius" expression="tool_diameter * 0.1"/>
+		<parameter name="entry_sweep" expression="90.0deg"/>
+		<parameter name="entry_verticalRadius" expression="entry_radius"/>
+		<parameter name="exit_distance" expression="tool_diameter * 0.1"/>
+		<parameter name="exit_perpendicular" expression="false"/>
+		<parameter name="exit_radius" expression="tool_diameter * 0.1"/>
+		<parameter name="exit_sameAsEntry" expression="true"/>
+		<parameter name="exit_sweep" expression="90.0deg"/>
+		<parameter name="exit_verticalRadius" expression="exit_radius"/>
+		<parameter name="explicitRampDiameter" expression="false"/>
+		<parameter name="feedHeight" expression="top + feedHeightOffset"/>
+		<parameter name="feedHeightMode" expression="'from top'"/>
+		<parameter name="feedHeightOffset" expression="0.2in"/>
+		<parameter name="feedHeightRef" expression="undefined"/>
+		<parameter name="finishFeedrate" expression="tool_feedCutting"/>
+		<parameter name="finishingOverlap" expression="0in"/>
+		<parameter name="finishingSmoothingDeviation" expression="0in"/>
+		<parameter name="finishingStepdown" expression="0.008in"/>
+		<parameter name="finishingStepover" expression="tool_diameter * 0.1"/>
+		<parameter name="fragmentExtensionDistance" expression="0"/>
+		<parameter name="helicalRampDiameter" expression="Math.max((tool_diameter - 2 * tool_cornerRadius) * 0.95; tool_diameter * 0.25)"/>
+		<parameter name="highFeedrate" expression="Math.max(tool_feedCutting; tool_feedEntry; tool_feedExit)"/>
+		<parameter name="highFeedrateMode" expression="'disabled'"/>
+		<parameter name="keepToolDown" expression="true"/>
+		<parameter name="leadOutAtPredrill" expression="false"/>
+		<parameter name="leadsForAllFinishingPasses" expression="compensationType != 'computer'"/>
+		<parameter name="liftHeight" expression="0in"/>
+		<parameter name="maximumRampZStepdown" expression="tool_fluteLength"/>
+		<parameter name="maximumStepdown" expression="0.04in"/>
+		<parameter name="maximumStepover" expression="Math.max((tool_diameter - 2 * tool_cornerRadius) * 0.95; tool_diameter * 0.05)"/>
+		<parameter name="minimumRadius" expression="0.0"/>
+		<parameter name="minimumRampDiameter" expression="helicalRampDiameter"/>
+		<parameter name="nullPass" expression="false"/>
+		<parameter name="numberOfFinishingStepdowns" expression="0"/>
+		<parameter name="numberOfFinishingStepovers" expression="1"/>
+		<parameter name="numberOfStepdowns" expression="0"/>
+		<parameter name="onlyFinishFinal" expression="false"/>
+		<parameter name="openPocket" expression="false"/>
+		<parameter name="orderByDepth" expression="false"/>
+		<parameter name="orderByStep" expression="false"/>
+		<parameter name="overrideToolView" expression="false"/>
+		<parameter name="preserveOrder" expression="false"/>
+		<parameter name="rampAngle" expression="2.0deg"/>
+		<parameter name="rampClearanceHeight" expression="0.1in"/>
+		<parameter name="rampDiameter" expression="(tool_diameter - 2 * tool_cornerRadius) * 0.95"/>
+		<parameter name="rampRadialClearance" expression="0"/>
+		<parameter name="rampType" expression="'helix'"/>
+		<parameter name="reduceOnlyInnerCorners" expression="true"/>
+		<parameter name="reducedFeedChange" expression="25deg"/>
+		<parameter name="reducedFeedDistance" expression="tool_diameter * 0.2"/>
+		<parameter name="reducedFeedRadius" expression="tool_diameter * 0.05"/>
+		<parameter name="reducedFeedrate" expression="tool_feedCutting * 0.25"/>
+		<parameter name="restMaterialCornerRadius" expression="0"/>
+		<parameter name="restMaterialCutterDiameter" expression="tool_diameter * 2"/>
+		<parameter name="restMaterialStockToLeave" expression="0in"/>
+		<parameter name="retractHeight" expression="stockZHigh + retractHeightOffset"/>
+		<parameter name="retractHeightMode" expression="'from stock top'"/>
+		<parameter name="retractHeightOffset" expression="0.2in"/>
+		<parameter name="retractHeightRef" expression="undefined"/>
+		<parameter name="roughFinal" expression="true"/>
+		<parameter name="safeDistance" expression="maximumStepdown+1.0mm"/>
+		<parameter name="simpleStockToLeave" expression="false"/>
+		<parameter name="slopeAngle" expression="(tool_type == 'tapered mill') ? tool_taperAngle : 0"/>
+		<parameter name="smoothingDeviation" expression="0.004in"/>
+		<parameter name="smoothingFilter" expression="false"/>
+		<parameter name="smoothingFilterTolerance" expression="tolerance * 0.1"/>
+		<parameter name="stayDownDistance" expression="2in"/>
+		<parameter name="stockToLeave" expression="0.02in"/>
+		<parameter name="tolerance" expression="0.004in"/>
+		<parameter name="toolViewOriginSelectionMode" expression="'setupWCS'"/>
+		<parameter name="top" expression="topOffset"/>
+		<parameter name="topMode" expression="'from wcs'"/>
+		<parameter name="topOffset" expression="0.25in"/>
+		<parameter name="topRef" expression="undefined"/>
+		<parameter name="useEvenStepdowns" expression="false"/>
+		<parameter name="useFeedOptimization" expression="false"/>
+		<parameter name="useMorphedSpiralMachining" expression="false"/>
+		<parameter name="useRestMachining" expression="false"/>
+		<parameter name="useSpiralForCicurlar" expression="true"/>
+		<parameter name="useStockContours" expression="false"/>
+		<parameter name="useStockToLeave" expression="false"/>
+		<parameter name="verticalStockToLeave" expression="0.1"/>
+		<parameter name="viewOrigin" expression=""/>
+		<parameter name="viewPlane" expression=""/>
+		<parameter name="viewReverseX" expression="false"/>
+		<parameter name="viewReverseY" expression="false"/>
+		<parameter name="viewReverseZ" expression="false"/>
+		<parameter name="viewSelection" expression="'originAndOrientation'"/>
+		<parameter name="wcsOriginSelection" expression="'top center'"/>
+	</template>
+</template-document>
